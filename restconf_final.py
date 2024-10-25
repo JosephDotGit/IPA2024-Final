@@ -96,22 +96,33 @@ def enable():
         # return f"Cannot enable: Interface loopback {studentID}"
 
 
-# def disable():
-#     yangConfig = <!!!REPLACEME with YANG data!!!>
+def disable():
+    yangConfig = {
+        "ietf-interfaces:interface": {
+            "name": f"Loopback{studentID}",
+            "type": "iana-if-type:softwareLoopback",
+            "enabled": False,
+        }
+    }
 
-#     resp = requests.<!!!REPLACEME with the proper HTTP Method!!!>(
-#         <!!!REPLACEME with URL!!!>, 
-#         data=json.dumps(<!!!REPLACEME with yangConfig!!!>), 
-#         auth=basicauth, 
-#         headers=<!!!REPLACEME with HTTP Header!!!>, 
-#         verify=False
-#         )
+    resp = requests.patch(
+        # <!!!REPLACEME with URL!!!>,
+        api_url + f"/ietf-interfaces:interfaces/interface=Loopback{studentID}",
+        data=json.dumps(yangConfig),
+        auth=basicauth,
+        headers=headers,
+        verify=False,
+    )
 
-#     if(resp.status_code >= 200 and resp.status_code <= 299):
-#         print("STATUS OK: {}".format(resp.status_code))
-#         return "<!!!REPLACEME with proper message!!!>"
-#     else:
-#         print('Error. Status Code: {}'.format(resp.status_code))
+    if resp.status_code == 404:
+        print("Error. Status NOT FOUND: {} ".format(resp.status_code))
+        return f"Cannot shutdown: Interface loopback {studentID}"
+    if resp.status_code >= 200 and resp.status_code <= 299:
+        print("STATUS OK: {}".format(resp.status_code))
+        return f"Interface loopback {studentID} is shutdowned successfully"
+    else:
+        print("Error. Status Code: {}".format(resp.status_code))
+        # return f"Cannot shutdown: Interface loopback {studentID}"
 
 
 # def status():
