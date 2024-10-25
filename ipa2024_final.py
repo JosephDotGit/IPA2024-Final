@@ -10,6 +10,7 @@ import requests
 import json
 import time
 import restconf_final
+import netmiko_final
 
 #######################################################################################
 # 2. Assign the Webex access token to the variable ACCESS_TOKEN using environment variables.
@@ -89,6 +90,8 @@ while True:
         elif command == "status":
             #     <!!!REPLACEME with code for status command!!!>
             responseMessage = restconf_final.status()
+        elif command == "gigabit_status":
+            responseMessage = netmiko_final.gigabit_status()
         else:
             responseMessage = "Error: No command or unknown command"
         
