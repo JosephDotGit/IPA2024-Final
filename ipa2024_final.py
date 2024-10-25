@@ -1,7 +1,7 @@
 #######################################################################################
-# Yourname:
-# Your student ID:
-# Your GitHub Repo: 
+# Yourname: JosephDotGit
+# Your student ID: 65070037
+# Your GitHub Repo: https://github.com/JosephDotGit/NPA2023-Final/tree/main
 
 #######################################################################################
 # 1. Import libraries for API requests, JSON formatting, time, os, (restconf_final or netconf_final), netmiko_final, and ansible_final.
