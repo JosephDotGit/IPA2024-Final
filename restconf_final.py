@@ -47,19 +47,24 @@ def create():
         print("Error. Status Code: {}".format(resp.status_code))
 
 
-# def delete():
-#     resp = requests.<!!!REPLACEME with the proper HTTP Method!!!>(
-#         <!!!REPLACEME with URL!!!>, 
-#         auth=basicauth, 
-#         headers=<!!!REPLACEME with HTTP Header!!!>, 
-#         verify=False
-#         )
+def delete():
+    resp = requests.delete(
+        # <!!!REPLACEME with URL!!!>,
+        api_url + f"/ietf-interfaces:interfaces/interface=Loopback{studentID}",
+        auth=basicauth,
+        headers=headers,
+        verify=False,
+    )
 
-#     if(resp.status_code >= 200 and resp.status_code <= 299):
-#         print("STATUS OK: {}".format(resp.status_code))
-#         return "<!!!REPLACEME with proper message!!!>"
-#     else:
-#         print('Error. Status Code: {}'.format(resp.status_code))
+    if resp.status_code == 404:
+        print("Error. Status NOT FOUND: {} ".format(resp.status_code))
+        return f"Cannot delete: Interface loopback {studentID}"
+
+    if resp.status_code >= 200 and resp.status_code <= 299:
+        print("STATUS OK: {}".format(resp.status_code))
+        return f"Interface loopback {studentID} is deleted successfully"
+    else:
+        print("Error. Status Code: {}".format(resp.status_code))
 
 
 # def enable():
