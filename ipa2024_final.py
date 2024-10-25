@@ -135,10 +135,11 @@ while True:
         # Post the call to the Webex Teams message API.
         r = requests.post(
             "https://webexapis.com/v1/messages",
-            data=json.dumps(postData),
+            data=postData,
             headers=HTTPHeaders,
         )
         if not r.status_code == 200:
+            print("Response:", r.text)
             raise Exception(
                 "Incorrect reply from Webex Teams API. Status code: {}".format(r.status_code)
             )
